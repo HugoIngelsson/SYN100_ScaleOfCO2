@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <title>SYN 100 Page</title>
+        <meta charset="utf-8">
+        <style>
+            body, html {
+                height:100%;
+                overflow: hidden;
+            }
+
+            #element-container {
+                position: relative;
+                width: 100vw;
+                height: 90vh;
+                margin: auto;
+            }
+
+            movable-element {
+                container-type: inline-size;
+                position: absolute; /* or relative */
+                background-color: blue;
+                left: 50%; /* Initial position */
+                top: 50%; /* Initial position */
+                width: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+            movable-element figcaption {
+                font-size: 20cqw;
+            }
+
+            movable-element p {
+                color: red;
+                font-size: 14cqw;
+            }
+        </style>
+    </head>
+    <body>
+        <main>
+            <div id="element-container">
+            </div>
+
+            <input type="range" id="positionSlider" min="0" max="1000" value="500">
+        </main>
+    </body>
+
+    <script src="index.js"></script>
+</html>
