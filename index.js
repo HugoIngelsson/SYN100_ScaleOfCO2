@@ -3,13 +3,13 @@ const positionSlider = document.getElementById('positionSlider');
 
 positionSlider.addEventListener('input', onSlide);
 
-function onSlide() {
+function renderAll() {
     const sliderValue = positionSlider.value;
     const sliderAdj = (sliderValue-500)/50;
     
     movableElements.forEach(elem => {
         const x = 50+parseFloat(elem.dataset.dx)*2.5**(parseFloat(elem.dataset.size)+sliderAdj);
-        const y = 30+parseFloat(elem.dataset.dy)*2.5**(parseFloat(elem.dataset.size)+sliderAdj);
+        const y = 50+parseFloat(elem.dataset.dy)*2.5**(parseFloat(elem.dataset.size)+sliderAdj);
         elem.style.left = `${x}%`;
         elem.style.top = `${y}%`;
         
@@ -24,34 +24,71 @@ function onSlide() {
     });
 }
 
+function enableTransition() {
+    movableElements.forEach(elem => {
+        elem.style.transition = "left 1s, top 1s, width 1s";
+    });
+}
+
+function disableTransition() {
+    movableElements.forEach(elem => {
+        elem.style.transition = "";
+    });
+}
+
+function onSlide() {
+    disableTransition();
+    renderAll();
+}
+
+// a = 2.5 ** (size + (x-500)/50)
+// size+(x-500)/50 = log2.5(a)
+function onClick(event, item) {
+    const elem = item;
+    positionSlider.value = (Math.min(Math.log(10 / Math.abs(elem.dataset.dx)), Math.log(20 / Math.abs(elem.dataset.dy))) 
+        / Math.log(2.3) - elem.dataset.size) * 50 + 500;
+    enableTransition();
+    renderAll();
+}
+
 function createMovableElement(dict) {
     const elem = document.createElement('movable-element');
 
+    const img = document.createElement('img');
+    const p = document.createElement('p');
+    const imgcaption = document.createElement('figcaption');
+
     if ('img' in dict) {
-        const img = document.createElement('img');
         img.src = dict['img'];
-        img.style.width = '100%'; // could change to be variable
-
-        elem.appendChild(img);
-    }
-
-    if ('figcaption' in dict) {
-        const imgcaption = document.createElement('figcaption');
-        imgcaption.textContent = dict['figcaption'];
-
-        elem.appendChild(imgcaption);
+        img.style.width = '100%';
     }
 
     if ('p' in dict) {
-        const p = document.createElement('p');
         p.textContent = dict['p'];
-
-        elem.appendChild(p);
     }
+
+    if ('figcaption' in dict) {
+        imgcaption.textContent = dict['figcaption'];
+    }
+
+    p.style.top = "0px";
+    if (parseFloat(dict['dx']) >= 0) {
+        p.style.left = "100%";
+    } else {
+        p.style.left = "-100%";
+    }
+
+    elem.appendChild(img);
+    elem.appendChild(imgcaption);
+    elem.appendChild(p);
 
     elem.dataset.dx = dict['dx'];
     elem.dataset.dy = dict['dy'];
     elem.dataset.size = dict['size'];
+
+    elem.addEventListener('click', function(event) {
+        onClick(event, this);
+    });
 
     return elem;
 }
