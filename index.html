@@ -19,7 +19,7 @@
             movable-element {
                 container-type: inline-size;
                 position: absolute; /* or relative */
-                background-color: blue;
+                background-color: yellow;
                 left: 50%; /* Initial position */
                 top: 50%; /* Initial position */
                 width: 50%;
@@ -41,10 +41,9 @@
                 transition: opacity 0.3s ease-in-out, visibility 0.5s ease-in-out;
             }
 
-            movable-element:hover p {
+            movable-element[data-selected] p {
                 visibility: visible;
                 opacity: 1;
-                transition-delay: 1s;
             }
         </style>
     </head>

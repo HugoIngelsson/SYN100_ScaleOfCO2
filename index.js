@@ -1,4 +1,4 @@
-let movableElements;
+let movableElements, curSelection = null;
 const positionSlider = document.getElementById('positionSlider');
 
 positionSlider.addEventListener('input', onSlide);
@@ -45,8 +45,21 @@ function onSlide() {
 // size+(x-500)/50 = log2.5(a)
 function onClick(event, item) {
     const elem = item;
-    positionSlider.value = (Math.min(Math.log(10 / Math.abs(elem.dataset.dx)), Math.log(20 / Math.abs(elem.dataset.dy))) 
-        / Math.log(2.3) - elem.dataset.size) * 50 + 500;
+
+    if (item == curSelection) {
+        delete curSelection.dataset.selected;
+        curSelection = null;
+    } else {
+        if (curSelection != null) {
+            delete curSelection.dataset.selected;
+        }
+        curSelection = item;
+        curSelection.dataset.selected = '';
+
+        positionSlider.value = (Math.min(Math.log(10 / Math.abs(elem.dataset.dx)), Math.log(20 / Math.abs(elem.dataset.dy))) 
+            / Math.log(2.3) - elem.dataset.size) * 50 + 500;
+    }
+
     enableTransition();
     renderAll();
 }
