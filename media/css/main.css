@@ -1,6 +1,73 @@
+@import url(vars.css);
+@import url(range-input.css);
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
 body, html {
     height:100%;
     overflow: hidden;
+}
+
+header {
+    display: inline;
+}
+
+nav a:hover {
+    background-color: var(--palette-color3, #4fbc9c);
+}
+
+nav {
+    z-index: 3; /* ensure rendered on top */
+    width: 100%;
+    display: block;
+    font-size: var(--nav-font-size);
+
+    top: 0;
+    position: sticky;
+    height: var(--nav-height);
+    align-items: center;
+
+    ul {
+        display: flex;
+        justify-content: center;
+        overflow: hidden;
+        list-style-type: none;
+        background-color: var(--palette-color2, #106967);
+        height: 100%;
+
+        li {
+            height: 100%;
+            align-content: center;
+
+            a {
+                display: block;
+                align-content: center;
+                text-align: center;
+                background-color: var(--palette-color2, #106967);
+                color: var(--palette-color5, #efca7c);
+                text-decoration: none;
+                height: 100%;
+                padding: 0 16px;
+            }
+
+            a:hover {
+                color: var(--palette-color1, #163235);
+            }
+
+            a.active {
+                background-color: var(--palette-color3, #4fbc9c);
+                color: var(--palette-color1, #163235);
+            }
+
+            img {
+                width: calc(var(--nav-height) / 2);
+                height: 100%;
+            }
+        }
+    }
 }
 
 #element-container {
@@ -18,21 +85,21 @@ movable-element {
     top: 50%; /* Initial position */
     width: 50%;
     transform: translate(-50%, -50%);
-}
 
-movable-element figcaption {
-    font-size: 20cqw;
-}
+    figcaption {
+        font-size: 20cqw;
+    }
 
-movable-element p {
-    position: absolute;
-    width: 100%;
-    background-color: blanchedalmond;
-    color: red;
-    font-size: 14cqw;
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out, visibility 0.5s ease-in-out;
+    p {
+        position: absolute;
+        width: 100%;
+        background-color: blanchedalmond;
+        color: red;
+        font-size: 14cqw;
+        visibility: hidden;
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out, visibility 0.5s ease-in-out;
+    }
 }
 
 movable-element[data-selected] p {

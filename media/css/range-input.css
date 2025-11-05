@@ -1,0 +1,74 @@
+@import url(vars.css);
+
+input[type="range"] {
+    z-index: 2;
+    display: block;
+    margin: 0 auto;
+    position: relative;
+}
+
+input[type="range"] {
+    -webkit-appearance: none; /* For WebKit browsers (Chrome, Safari) */
+    appearance: none; /* Standard property */
+    background: transparent;
+    cursor: pointer;
+    width: 20vw; /* Or desired width */
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+    background: var(--palette-color5); /* Example track color */
+    height: var(--slider-height);
+    border-radius: calc(var(--slider-height) / 2);
+}
+
+/* Mozilla Firefox */
+input[type="range"]::-moz-range-track {
+    background: var(--palette-color5);
+    height: var(--slider-height);
+    border-radius: calc(var(--slider-height) / 2);
+}
+
+/* Microsoft Edge/IE */
+input[type="range"]::-ms-track {
+    background: transparent; /* Needed for IE/Edge */
+    border-color: transparent;
+    color: transparent; /* Hides default track */
+    height: var(--slider-height);
+}
+
+input[type="range"]::-ms-fill-lower { /* Lower part of track in IE/Edge */
+    background: var(--palette-color5); /* Example fill color */
+    border-radius: calc(var(--slider-height) / 2);
+}
+
+input[type="range"]::-ms-fill-upper { /* Upper part of track in IE/Edge */
+    background: var(--palette-color5);
+    border-radius: 4px;
+}
+
+/* WebKit browsers (Chrome, Safari) */
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    background: var(--palette-color4); /* Example thumb color */
+    height: var(--slider-circle-radius);
+    width: var(--slider-circle-radius);
+    border-radius: 50%;
+    margin-top: -8px; /* Adjust to center vertically on the track */
+}
+
+/* Mozilla Firefox */
+input[type="range"]::-moz-range-thumb {
+    background: var(--palette-color4);
+    height: var(--slider-circle-radius);
+    width: var(--slider-circle-radius);
+    border-radius: 50%;
+}
+
+/* Microsoft Edge/IE */
+input[type="range"]::-ms-thumb {
+    background: var(--palette-color4);
+    height: var(--slider-circle-radius);
+    width: var(--slider-circle-radius);
+    border-radius: 50%;
+}
