@@ -41,8 +41,6 @@ function onSlide() {
     renderAll();
 }
 
-// a = 2.5 ** (size + (x-500)/50)
-// size+(x-500)/50 = log2.5(a)
 function onClick(event, item) {
     const elem = item;
 
@@ -72,7 +70,7 @@ function createMovableElement(dict) {
     const imgcaption = document.createElement('figcaption');
 
     if ('img' in dict) {
-        img.src = dict['img'];
+        img.src = './media/img/' + dict['img'];
         img.style.width = '100%';
     }
 
@@ -125,7 +123,7 @@ function initSpace(elemContainer, fileName) {
 document.addEventListener('DOMContentLoaded', () => {
     const elemContainer = document.getElementById('element-container');
 
-    initSpace(elemContainer, 'data.json');
+    initSpace(elemContainer, './media/json/data.json');
 
     elemContainer.addEventListener('wheel', function(event) {
         positionSlider.value = parseInt(positionSlider.value)+event.deltaY;

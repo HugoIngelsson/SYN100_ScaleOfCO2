@@ -3,50 +3,17 @@
     <head>
         <title>SYN 100 Page</title>
         <meta charset="utf-8">
-        <style>
-            body, html {
-                height:100%;
-                overflow: hidden;
-            }
-
-            #element-container {
-                position: relative;
-                width: 100vw;
-                height: 90vh;
-                margin: auto;
-            }
-
-            movable-element {
-                container-type: inline-size;
-                position: absolute; /* or relative */
-                background-color: yellow;
-                left: 50%; /* Initial position */
-                top: 50%; /* Initial position */
-                width: 50%;
-                transform: translate(-50%, -50%);
-            }
-
-            movable-element figcaption {
-                font-size: 20cqw;
-            }
-
-            movable-element p {
-                position: absolute;
-                width: 100%;
-                background-color: blanchedalmond;
-                color: red;
-                font-size: 14cqw;
-                visibility: hidden;
-                opacity: 0;
-                transition: opacity 0.3s ease-in-out, visibility 0.5s ease-in-out;
-            }
-
-            movable-element[data-selected] p {
-                visibility: visible;
-                opacity: 1;
-            }
-        </style>
+        <link rel="stylesheet" href="./media/css/main.css" />
     </head>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html" class="cur-page">Home</a></li>
+                <li><a href="index.html" class="cur-page">About Us</a></li>
+                <li><a href="index.html" class="cur-page">Reference</a></li>
+            </ul>
+        </nav>
+    </header>
     <body>
         <main>
             <div id="element-container">
@@ -56,5 +23,5 @@
         </main>
     </body>
 
-    <script src="index.js"></script>
+    <script src="./media/script/index.js"></script>
 </html>
