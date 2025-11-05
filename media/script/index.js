@@ -54,7 +54,7 @@ function onClick(event, item) {
         curSelection = item;
         curSelection.dataset.selected = '';
 
-        positionSlider.value = (Math.min(Math.log(10 / Math.abs(elem.dataset.dx)), Math.log(20 / Math.abs(elem.dataset.dy))) 
+        positionSlider.value = (Math.min(Math.log(15 / Math.abs(elem.dataset.dx)), Math.log(20 / Math.abs(elem.dataset.dy))) 
             / Math.log(2.3) - elem.dataset.size) * 50 + 500;
     }
 
@@ -69,29 +69,48 @@ function createMovableElement(dict) {
     const p = document.createElement('p');
     const imgcaption = document.createElement('figcaption');
 
+    const alwaysDisp = document.createElement('always-display');
+    const infoReveal = document.createElement('info-reveal');
+
     if ('img' in dict) {
         img.src = './media/img/' + dict['img'];
         img.style.width = '100%';
     }
 
-    if ('p' in dict) {
+    if ('info-reveal' in dict) {
+        const name = document.createElement('h1');
+        name.textContent = dict['info-reveal']['name'];
+
+        const output = document.createElement('h2');
+        output.textContent = dict['info-reveal']['output'];
+
+        p.textContent = dict['info-reveal']['description'];
+
+        infoReveal.appendChild(name);
+        infoReveal.appendChild(output);
+        infoReveal.appendChild(p);
+    } else if ('p' in dict) {
         p.textContent = dict['p'];
+
+        infoReveal.appendChild(p);
     }
 
     if ('figcaption' in dict) {
         imgcaption.textContent = dict['figcaption'];
     }
 
-    p.style.top = "0px";
+    infoReveal.style.top = "50%";
     if (parseFloat(dict['dx']) >= 0) {
-        p.style.left = "100%";
+        infoReveal.style.left = "120%";
     } else {
-        p.style.left = "-100%";
+        infoReveal.style.left = "-120%";
     }
 
-    elem.appendChild(img);
-    elem.appendChild(imgcaption);
-    elem.appendChild(p);
+    alwaysDisp.appendChild(img);
+    alwaysDisp.appendChild(imgcaption);
+
+    elem.appendChild(infoReveal)
+    elem.appendChild(alwaysDisp);
 
     elem.dataset.dx = dict['dx'];
     elem.dataset.dy = dict['dy'];

@@ -8,6 +8,15 @@
         "size": 0.5
     },
     {
+        "always-display": {
+            "img": "spoon.jpg",
+            "figcaption": "Spoon"
+        },
+        "info-reveal": {
+            "name": "Spoon",
+            "output": "100 cal",
+            "description": "Great when eating a soup! Invented many years ago, but still in use today."
+        },
         "img": "spoon.jpg",
         "figcaption": "Spoon",
         "p": "Great when eating a soup!",

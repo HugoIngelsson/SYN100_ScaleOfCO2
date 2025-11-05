@@ -7,8 +7,10 @@
 }
 
 body, html {
+    background-color: rgb(240, 255, 240);
     height:100%;
     overflow: hidden;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 header {
@@ -78,31 +80,73 @@ nav {
 }
 
 movable-element {
+    display: block;
     container-type: inline-size;
-    position: absolute; /* or relative */
-    background-color: yellow;
-    left: 50%; /* Initial position */
-    top: 50%; /* Initial position */
+    position: absolute;
+    left: 50%;
+    top: 50%;
     width: 50%;
     transform: translate(-50%, -50%);
 
     figcaption {
         font-size: 20cqw;
-    }
-
-    p {
-        position: absolute;
-        width: 100%;
-        background-color: blanchedalmond;
-        color: red;
-        font-size: 14cqw;
-        visibility: hidden;
-        opacity: 0;
-        transition: opacity 0.3s ease-in-out, visibility 0.5s ease-in-out;
+        text-align: center;
+        font-weight: bold;
     }
 }
 
-movable-element[data-selected] p {
+movable-element always-display {
+    display: block;
+    width: 100%;
+    height: 100%;
+
+    border-radius: 10%;
+
+    padding: 10%;
+    transition: background-color 300ms ease-in-out;
+}
+
+movable-element info-reveal {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    width: calc(100% + 8cqw);
+    border-radius: 10%;
+
+    transform: translateY(-50%);
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out, visibility 0.5s ease-in-out;
+
+    margin: 10%;
+
+    background-color: white;
+
+    h1, h2, p {
+        margin: 2cqw 4cqw;
+    }
+
+    h1 {
+        font-size: 14cqw;
+        font-weight: bold;
+    }
+
+    h2 {
+        font-size: 14cqw;
+        font-weight: normal;
+    }
+
+    p {
+        width: 100%;
+        font-size: 12cqw;
+    }
+}
+
+movable-element[data-selected] info-reveal {
     visibility: visible;
     opacity: 1;
+}
+
+always-display:hover {
+    background-color: #ccc;
 }
