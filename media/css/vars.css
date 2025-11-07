@@ -11,4 +11,6 @@
 
     --slider-height: 14px;
     --slider-circle-radius: 30px;
+
+    --dimension-scaler: min(100vw, 100vh);
 }

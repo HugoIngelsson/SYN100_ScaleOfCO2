@@ -3,18 +3,19 @@ const positionSlider = document.getElementById('positionSlider');
 
 positionSlider.addEventListener('input', onSlide);
 
+const LINEAR = 550, SCALAR = 40;
 function renderAll() {
     const sliderValue = positionSlider.value;
-    const sliderAdj = (sliderValue-500)/50;
+    const sliderAdj = (sliderValue - LINEAR) / SCALAR;
     
     movableElements.forEach(elem => {
-        const x = 50+parseFloat(elem.dataset.dx)*2.5**(parseFloat(elem.dataset.size)+sliderAdj);
-        const y = 50+parseFloat(elem.dataset.dy)*2.5**(parseFloat(elem.dataset.size)+sliderAdj);
-        elem.style.left = `${x}%`;
-        elem.style.top = `${y}%`;
+        const x = parseFloat(elem.dataset.dx)*2.5**(parseFloat(elem.dataset.size)+sliderAdj);
+        const y = parseFloat(elem.dataset.dy)*2.5**(parseFloat(elem.dataset.size)+sliderAdj);
+        elem.style.left = `calc(50% + var(--dimension-scaler) * ${x} / 100)`;
+        elem.style.top = `calc(50% + var(--dimension-scaler) * ${y} / 100)`;
         
         const size = 2.3**(parseFloat(elem.dataset.size)+sliderAdj);
-        elem.style.width = `${size}%`
+        elem.style.width = `calc(var(--dimension-scaler) * ${size} / 100)`
 
         console.log(size, x, y)
         if (size < 0.25 || (x > 125 || x < -25) && (y > 125 || y < -25))
@@ -54,8 +55,8 @@ function onClick(event, item) {
         curSelection = item;
         curSelection.dataset.selected = '';
 
-        positionSlider.value = (Math.min(Math.log(15 / Math.abs(elem.dataset.dx)), Math.log(20 / Math.abs(elem.dataset.dy))) 
-            / Math.log(2.3) - elem.dataset.size) * 50 + 500;
+        positionSlider.value = (Math.min(Math.log(10 / Math.abs(elem.dataset.dx)), Math.log(15 / Math.abs(elem.dataset.dy))) 
+            / Math.log(2.3) - elem.dataset.size) * SCALAR + LINEAR;
     }
 
     enableTransition();
@@ -65,17 +66,8 @@ function onClick(event, item) {
 function createMovableElement(dict) {
     const elem = document.createElement('movable-element');
 
-    const img = document.createElement('img');
-    const p = document.createElement('p');
-    const imgcaption = document.createElement('figcaption');
-
     const alwaysDisp = document.createElement('always-display');
     const infoReveal = document.createElement('info-reveal');
-
-    if ('img' in dict) {
-        img.src = './media/img/' + dict['img'];
-        img.style.width = '100%';
-    }
 
     if ('info-reveal' in dict) {
         const name = document.createElement('h1');
@@ -84,37 +76,43 @@ function createMovableElement(dict) {
         const output = document.createElement('h2');
         output.textContent = dict['info-reveal']['output'];
 
+        const p = document.createElement('p');
         p.textContent = dict['info-reveal']['description'];
 
         infoReveal.appendChild(name);
         infoReveal.appendChild(output);
         infoReveal.appendChild(p);
     } else if ('p' in dict) {
+        const p = document.createElement('p');
         p.textContent = dict['p'];
 
         infoReveal.appendChild(p);
     }
 
-    if ('figcaption' in dict) {
-        imgcaption.textContent = dict['figcaption'];
+    if ('always-display' in dict) {
+        const img = document.createElement('img');
+        img.src = './media/img/' + dict['always-display']['img'];
+
+        const imgcaption = document.createElement('figcaption');
+        imgcaption.textContent = dict['always-display']['figcaption'];
+
+        alwaysDisp.appendChild(img);
+        alwaysDisp.appendChild(imgcaption);
     }
 
     infoReveal.style.top = "50%";
     if (parseFloat(dict['dx']) >= 0) {
-        infoReveal.style.left = "120%";
+        infoReveal.style.left = "110%";
     } else {
         infoReveal.style.left = "-120%";
     }
-
-    alwaysDisp.appendChild(img);
-    alwaysDisp.appendChild(imgcaption);
 
     elem.appendChild(infoReveal)
     elem.appendChild(alwaysDisp);
 
     elem.dataset.dx = dict['dx'];
     elem.dataset.dy = dict['dy'];
-    elem.dataset.size = dict['size'];
+    elem.dataset.size = Math.log10(dict['carbon']) / Math.log10(5);
 
     elem.addEventListener('click', function(event) {
         onClick(event, this);

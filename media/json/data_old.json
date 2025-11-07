@@ -1,0 +1,87 @@
+{
+    "data": [
+    {
+        "always-display": {
+            "img": "placeholder.png",
+            "figcaption": "Mobile Phone"
+        },
+        "info-reveal": {
+            "name": "Mobile Phone (1 hour)",
+            "output": "172 grams",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        },
+        "dx": 0.2,
+        "dy": -0.84,
+        "carbon": 172
+    },
+    {
+        "always-display": {
+            "img": "placeholder.png",
+            "figcaption": "ChatGPT Prompt"
+        },
+        "info-reveal": {
+            "name": "ChatGPT Prompt",
+            "output": "2.5 grams",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        },
+        "dx": 0.4,
+        "dy": 0.7,
+        "carbon": 2.5
+    },
+    {
+        "always-display": {
+            "img": "placeholder.png",
+            "figcaption": "Google Search"
+        },
+        "info-reveal": {
+            "name": "Google Search",
+            "output": "0.2 grams",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        },
+        "dx": -1,
+        "dy": -0.2,
+        "carbon": 0.2
+    },
+    {
+        "always-display": {
+            "img": "placeholder.png",
+            "figcaption": "Kettle"
+        },
+        "info-reveal": {
+            "name": "Kettle",
+            "output": "47 grams",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        },
+        "dx": -0.8,
+        "dy": 0.5,
+        "carbon": 47
+    },
+    {
+        "always-display": {
+            "img": "placeholder.png",
+            "figcaption": "Electric Dryer"
+        },
+        "info-reveal": {
+            "name": "Electric Tumble Dryer Cycle",
+            "output": "930 grams",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        },
+        "dx": 0.8,
+        "dy": 0.3,
+        "carbon": 930
+    },
+    {
+        "always-display": {
+            "img": "placeholder.png",
+            "figcaption": "Washing Machine"
+        },
+        "info-reveal": {
+            "name": "Washing Machine Use",
+            "output": "273 grams",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        },
+        "dx": -0.7,
+        "dy": -0.45,
+        "carbon": 273
+    }
+]}
