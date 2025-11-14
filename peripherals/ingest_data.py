@@ -13,9 +13,9 @@ for row_id, row in data.iterrows():
 
     item['dx'] = random.random() * 2 - 1
     item['dy'] = math.sqrt(1 - item['dx'] ** 2) * (1 if random.random() < 0.5 else -1)
-    item['carbon'] = row['Numeric (in grams)']
+    item['carbon'] = row['Numeric (grams)']
 
-    item['always-display']['img'] = 'placeholder.png'
+    item['always-display']['img'] = '' if pd.isna(row['Image Name']) else row['Image Name']
     item['always-display']['figcaption'] = row['Item Name']
     
     item['info-reveal']['output'] = row['CO2 (g/kg)']
