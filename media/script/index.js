@@ -1,6 +1,10 @@
 let movableElements, curSelection = null;
 const positionSlider = document.getElementById('positionSlider');
 
+// for tracking inactivity
+let inactivityTimer, scroller, scrollDir, maxScroll, minScroll;
+const inactivityDuration = 20000, scrollRate = 100;
+
 positionSlider.addEventListener('input', onSlide);
 
 const LINEAR = 550, SCALAR = 40;
@@ -42,6 +46,28 @@ function onSlide() {
     renderAll();
 }
 
+function passiveScroll() {
+    enableTransition();
+    
+    let val = parseInt(positionSlider.value)
+    if (val === maxScroll) {
+        scrollDir = -1;
+    } else if (val === minScroll) {
+        scrollDir = 1;
+    }
+
+    positionSlider.value = val + scrollDir;
+
+    renderAll();
+    scroller = setTimeout(passiveScroll, scrollRate); // set up next scroll
+}
+
+function resetInactivityTimer() {
+    clearTimeout(inactivityTimer);
+    clearTimeout(scroller);
+    inactivityTimer = setTimeout(passiveScroll, inactivityDuration);
+}
+
 function onClick(event, item) {
     const elem = item;
 
@@ -59,6 +85,7 @@ function onClick(event, item) {
             / Math.log(2.3) - elem.dataset.size) * SCALAR + LINEAR;
     }
 
+    resetInactivityTimer();
     enableTransition();
     renderAll();
 }
@@ -91,7 +118,10 @@ function createMovableElement(dict) {
 
     if ('always-display' in dict) {
         const img = document.createElement('img');
-        img.src = './media/img/' + dict['always-display']['img'];
+        if (dict['always-display']['img'] !== '')
+            img.src = './media/img/' + dict['always-display']['img'] + '.svg';
+        else
+            img.src = './media/img/placeholder.png';
 
         const imgcaption = document.createElement('figcaption');
         imgcaption.textContent = dict['always-display']['figcaption'];
@@ -141,9 +171,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const elemContainer = document.getElementById('element-container');
 
     initSpace(elemContainer, './media/json/data.json');
+    resetInactivityTimer();
+    scrollDir = 1;
+    maxScroll = parseInt(positionSlider.max);
+    minScroll = parseInt(positionSlider.min);
 
     elemContainer.addEventListener('wheel', function(event) {
         positionSlider.value = parseInt(positionSlider.value)+event.deltaY;
+        resetInactivityTimer();
         onSlide();
     });
 })
