@@ -164,3 +164,27 @@ movable-element[data-selected] info-reveal {
 always-display:hover {
     background-color: #ccc;
 }
+
+#cited-container {
+    display: block;
+    width: fit-content;
+    min-width: 50vw;
+    margin: 3rem auto;
+
+    h1 {
+        text-align: center;
+    }
+}
+
+ol {
+    list-style-type: none;
+    counter-reset: reference-counter;
+
+    li {
+        counter-increment: reference-counter;
+    }
+
+    li::before {
+        content: "[" counter(reference-counter) "] "
+    }
+}
