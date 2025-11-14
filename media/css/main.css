@@ -6,6 +6,10 @@
     padding: 0;
 }
 
+
+
+
+
 body, html {
     background-color: rgb(240, 255, 240);
     height:100%;
@@ -165,6 +169,16 @@ always-display:hover {
     background-color: #ccc;
 }
 
+.about-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.about-qr {
+    width: 150px;  /* adjust size */
+    height: auto;
+}
 #cited-container {
     display: block;
     width: fit-content;
