@@ -179,3 +179,26 @@ always-display:hover {
     width: 150px;  /* adjust size */
     height: auto;
 }
+#cited-container {
+    display: block;
+    width: fit-content;
+    min-width: 50vw;
+    margin: 3rem auto;
+
+    h1 {
+        text-align: center;
+    }
+}
+
+ol {
+    list-style-type: none;
+    counter-reset: reference-counter;
+
+    li {
+        counter-increment: reference-counter;
+    }
+
+    li::before {
+        content: "[" counter(reference-counter) "] "
+    }
+}
