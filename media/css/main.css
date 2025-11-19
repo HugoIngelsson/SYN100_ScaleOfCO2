@@ -161,6 +161,7 @@ movable-element[data-selected] {
 }
 
 movable-element[data-selected] info-reveal {
+    box-sizing: border-box;
     visibility: visible;
     opacity: 1;
 }
@@ -179,6 +180,7 @@ always-display:hover {
     width: 150px;  /* adjust size */
     height: auto;
 }
+
 #cited-container {
     display: block;
     width: fit-content;

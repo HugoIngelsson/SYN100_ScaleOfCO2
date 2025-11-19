@@ -22,10 +22,10 @@ function renderAll() {
         elem.style.width = `calc(var(--dimension-scaler) * ${size} / 100)`
 
         console.log(size, x, y)
-        if (size < 0.25 || (x > 125 || x < -25) && (y > 125 || y < -25))
-            elem.hidden = true;
+        if (size < 0.25 || (x > 75 || x < -75) && (y > 75 || y < -75))
+            elem.style.display = 'none';
         else
-            elem.hidden = false;
+            elem.style.display = 'block';
     });
 }
 
@@ -119,7 +119,7 @@ function createMovableElement(dict) {
     if ('always-display' in dict) {
         const img = document.createElement('img');
         if (dict['always-display']['img'] !== '')
-            img.src = './media/img/' + dict['always-display']['img'] + '.svg';
+            img.src = './media/img/' + dict['always-display']['img'];
         else
             img.src = './media/img/placeholder.png';
 

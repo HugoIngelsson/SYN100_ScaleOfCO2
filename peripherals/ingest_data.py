@@ -11,18 +11,29 @@ for row_id, row in data.iterrows():
     item['always-display'] = {}
     item['info-reveal'] = {}
 
-    item['dx'] = random.random() * 2 - 1
-    item['dy'] = math.sqrt(1 - item['dx'] ** 2) * (1 if random.random() < 0.5 else -1)
+    angle = 4 * math.log10(10 if pd.isna(row['Numeric (grams)']) or float(row['Numeric (grams)']) == 0 else float(row['Numeric (grams)']))
+    item['dx'] = math.cos(angle)
+    item['dy'] = math.sin(angle)
     item['carbon'] = row['Numeric (grams)']
 
-    item['always-display']['img'] = '' if pd.isna(row['Image Name']) else row['Image Name']
+    item['always-display']['img'] = '' if pd.isna(row['Image Name']) else row['Image Name'] + '.svg'
     item['always-display']['figcaption'] = row['Item Name']
     
     item['info-reveal']['output'] = row['CO2 (g/kg)']
     item['info-reveal']['name'] = row['Item Name']
-    item['info-reveal']['description'] = '' if pd.isna(row['Brief Description (~20 words)']) else row['Brief Description (~20 words)']
+    item['info-reveal']['description'] = '' if pd.isna(row['(Tentative) "Lively style" Description?']) else row['(Tentative) "Lively style" Description?']
     
     nested_dicts.append(item)
 
-f = open('dump.json', 'w')
+nested_dicts.append({
+    "always-display": {
+        "img": "qr.png",
+        "figcaption": "Survey"
+    },
+    "dx": 0.00001,
+    "dy": 0.00001,
+    "carbon": 0.008
+})
+
+f = open('data.json', 'w')
 f.write(json.dumps({'data': nested_dicts}))
