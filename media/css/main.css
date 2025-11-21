@@ -41,7 +41,7 @@ nav {
         justify-content: center;
         overflow: hidden;
         list-style-type: none;
-        background-color: var(--palette-color2, #106967);
+        background-color: var(--palette-color1, #106967);
         height: 100%;
 
         li {
@@ -52,7 +52,7 @@ nav {
                 display: block;
                 align-content: center;
                 text-align: center;
-                background-color: var(--palette-color2, #106967);
+                background-color: var(--palette-color1, #106967);
                 color: var(--palette-color5, #efca7c);
                 text-decoration: none;
                 height: 100%;
@@ -123,7 +123,7 @@ movable-element info-reveal {
     display: flex;
     flex-direction: column;
     position: absolute;
-    width: calc(100% + 8cqw);
+    width: calc(150% + 8cqw);
     border-radius: 10%;
 
     transform: translateY(-60%);

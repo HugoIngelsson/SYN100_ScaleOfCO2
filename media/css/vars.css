@@ -2,11 +2,11 @@
     --nav-height: 3rem;
     --nav-font-size: 1.2em;
 
-    --palette-color1: #163235;
-    --palette-color2: #106967;
-    --palette-color3: #4fbc9c;
-    --palette-color4: #32bfda;
-    --palette-color5: #efca7c;
+    --palette-color1: rgb(10, 89, 48);
+    --palette-color2: rgb(14, 95, 53);
+    --palette-color3: #58e07a;
+    --palette-color4: rgb(14, 95, 53);
+    --palette-color5: #f3c75a;
     --palette-color6: #e8b953;
 
     --slider-height: 14px;

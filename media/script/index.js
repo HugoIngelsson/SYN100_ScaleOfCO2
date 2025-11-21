@@ -21,11 +21,11 @@ function renderAll() {
         const size = 2.3**(parseFloat(elem.dataset.size)+sliderAdj);
         elem.style.width = `calc(var(--dimension-scaler) * ${size} / 100)`
 
-        console.log(size, x, y)
-        if (size < 0.25 || (x > 75 || x < -75) && (y > 75 || y < -75))
-            elem.style.display = 'none';
-        else
-            elem.style.display = 'block';
+        // console.log(size, x, y)
+        // if (size < 0.25 || (x > 150 || x < -150) && (y > 150 || y < -150))
+        //     elem.style.display = 'none';
+        // else
+        //     elem.style.display = 'block';
     });
 }
 
@@ -132,9 +132,9 @@ function createMovableElement(dict) {
 
     infoReveal.style.top = "50%";
     if (parseFloat(dict['dx']) >= 0) {
-        infoReveal.style.left = "110%";
+        infoReveal.style.left = "112%";
     } else {
-        infoReveal.style.left = "-120%";
+        infoReveal.style.left = "-170%";
     }
 
     elem.appendChild(infoReveal)
@@ -142,7 +142,7 @@ function createMovableElement(dict) {
 
     elem.dataset.dx = dict['dx'];
     elem.dataset.dy = dict['dy'];
-    elem.dataset.size = Math.log10(dict['carbon']) / Math.log10(5);
+    elem.dataset.size = Math.log10(dict['carbon']) / Math.log10(3);
 
     elem.addEventListener('click', function(event) {
         onClick(event, this);
