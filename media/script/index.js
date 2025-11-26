@@ -81,7 +81,7 @@ function onClick(event, item) {
         curSelection = item;
         curSelection.dataset.selected = '';
 
-        positionSlider.value = (Math.min(Math.log(10 / Math.abs(elem.dataset.dx)), Math.log(15 / Math.abs(elem.dataset.dy))) 
+        positionSlider.value = (Math.min(Math.log(15 / Math.abs(elem.dataset.dx)), Math.log(15 / Math.abs(elem.dataset.dy))) 
             / Math.log(2.3) - elem.dataset.size) * SCALAR + LINEAR;
     }
 
@@ -93,10 +93,9 @@ function onClick(event, item) {
 function createMovableElement(dict) {
     const elem = document.createElement('movable-element');
 
-    const alwaysDisp = document.createElement('always-display');
-    const infoReveal = document.createElement('info-reveal');
-
     if ('info-reveal' in dict) {
+        const infoReveal = document.createElement('info-reveal');
+
         const name = document.createElement('h1');
         name.textContent = dict['info-reveal']['name'];
 
@@ -106,17 +105,23 @@ function createMovableElement(dict) {
         const p = document.createElement('p');
         p.textContent = dict['info-reveal']['description'];
 
+        infoReveal.style.top = "50%";
+        if (parseFloat(dict['dx']) >= 0) {
+            infoReveal.style.left = "112%";
+        } else {
+            infoReveal.style.left = "-170%";
+        }
+
         infoReveal.appendChild(name);
         infoReveal.appendChild(output);
         infoReveal.appendChild(p);
-    } else if ('p' in dict) {
-        const p = document.createElement('p');
-        p.textContent = dict['p'];
 
-        infoReveal.appendChild(p);
+        elem.appendChild(infoReveal);
     }
 
     if ('always-display' in dict) {
+        const alwaysDisp = document.createElement('always-display');
+
         const img = document.createElement('img');
         if (dict['always-display']['img'] !== '')
             img.src = './media/img/' + dict['always-display']['img'];
@@ -128,17 +133,24 @@ function createMovableElement(dict) {
 
         alwaysDisp.appendChild(img);
         alwaysDisp.appendChild(imgcaption);
+
+        elem.appendChild(alwaysDisp);
     }
 
-    infoReveal.style.top = "50%";
-    if (parseFloat(dict['dx']) >= 0) {
-        infoReveal.style.left = "112%";
-    } else {
-        infoReveal.style.left = "-170%";
-    }
+    if ('fun-fact' in dict) {
+        const funFact = document.createElement('fun-fact');
 
-    elem.appendChild(infoReveal)
-    elem.appendChild(alwaysDisp);
+        const h1 = document.createElement('h1');
+        h1.textContent = dict['fun-fact']['h1'];
+
+        const p = document.createElement('p');
+        p.textContent = dict['fun-fact']['p'];
+
+        funFact.appendChild(h1);
+        funFact.appendChild(p);
+
+        elem.appendChild(funFact);
+    }
 
     elem.dataset.dx = dict['dx'];
     elem.dataset.dy = dict['dy'];

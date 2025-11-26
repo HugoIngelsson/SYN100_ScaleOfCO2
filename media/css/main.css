@@ -119,6 +119,31 @@ movable-element always-display {
     }
 }
 
+movable-element fun-fact {
+    display: block;
+    width: 200%;
+    height: fit-content;
+
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    border-radius: 10cqw;
+    background-color: var(--palette-color5);
+    text-align: center;
+
+    h1 {
+        font-size: 24cqw;
+        padding: 12cqw 8cqw 6cqw;
+    }
+
+    p {
+        font-size: 16cqw;
+        padding: 12cqw 8cqw 6cqw;
+    }
+}
+
 movable-element info-reveal {
     display: flex;
     flex-direction: column;

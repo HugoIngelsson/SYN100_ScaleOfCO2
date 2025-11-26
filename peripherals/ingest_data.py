@@ -41,5 +41,15 @@ nested_dicts.append({
     "carbon": 0.008
 })
 
+nested_dicts.append({
+    "fun-fact": {
+        "h1": "Did you know?",
+        "p": "By 2030, AI will be using the amount of energy that Japan uses today."
+    },
+    "dx": -0.74,
+    "dy": 0.74,
+    "carbon": 1
+})
+
 f = open('data.json', 'w')
 f.write(json.dumps({'data': nested_dicts}))
